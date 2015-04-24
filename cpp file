@@ -1,0 +1,108 @@
+#include <iostream>
+
+using namespace std;
+
+double makeSale();
+double cashOut();
+double cashIn();
+
+int main()			// while loop setup to run the program forever 
+{	
+	double total = 0;
+	int saleCount = 0;
+
+	while(true)
+	{
+		int selectNumber = 0;
+		cout << "\n\t\t\tWALGREEN CASH REGISTER PROGRAM\n\n " << endl;
+		cout << "1 --- NEW SALE\n" << endl;
+		cout << "2 --- CASH OUT\n" << endl;
+		cout << "3 --- CASH IN\n" << endl;
+		cout << "4 --- REPORT\n" << endl;
+		cout << "0 --- EXIT\n" << endl;
+		cout << "Select any of the following:\n" << endl;
+		cin >> selectNumber;
+
+		if(selectNumber == 1){
+
+			total += makeSale();
+			saleCount++;
+
+		} else if (selectNumber == 2){
+
+			total -= cashOut();
+
+		} else if (selectNumber == 3){
+
+			total += cashIn();
+
+		} else if (selectNumber == 4) {
+
+			cout << "Number of Sales:\n" << saleCount << endl;
+			cout << "Total money available in the register: \n" << total << endl;
+
+		} else if (selectNumber == 0){
+
+			// exit the program
+			break;
+		};
+
+	}
+
+}
+
+double makeSale() 
+{
+	int numberItems = 0;
+	cout << "\nHow many items are in this sale: \n" << endl;
+	cin >> numberItems;
+
+	double total = 0;
+
+	for(int i = 0; i < numberItems; i++)
+	{
+		int itemCode;
+		cout << "\nENTER ITEM CODE: \n" << endl;		 
+		cin >> itemCode;
+
+		double totalPrice = 0;
+
+	if (itemCode < 100) {		// item code < 100 --> it will be measured in price / pounds else 10% tax will be added with regular computation.
+		double pricePound;
+		cout << "\nENTER ITEM PRICE / POUND: \n" << endl;
+		cin >> pricePound;
+
+		double itemWeight;
+		cout << "\nENTER ITEM WEIGHT: \n" << endl;
+		cin >> itemWeight;
+
+		totalPrice = pricePound * itemWeight;
+
+	} else {
+
+		double piecePrice;
+		cout << "\nENTER PRICE: \n" << endl;
+		cin >> piecePrice;
+
+		totalPrice = piecePrice * 1.10;
+}
+		total += totalPrice;
+
+}
+	cout << "The total is: \n" << total << "\n" << endl;
+	return total;
+}
+
+double cashOut(){
+	double amountOut;
+	cout << "Cash-out Amount: " << endl;
+	cin >> amountOut;
+	return amountOut;
+}
+
+double cashIn(){
+	double amountIn;
+	cout << "Cash-IN Amount: " << endl;
+	cin >> amountIn;
+	return amountIn;
+}
